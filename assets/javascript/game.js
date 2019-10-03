@@ -10,14 +10,15 @@ var winningNum = Math.floor(Math.random() * 60) + 30;
 $("#win-points").text(winningNum);
 
 var counter = 0;
+$("#img-score").text(counter);
 var imageValue;
 var randomNumber;
 
 //array of images to put in html
-var pictures = ["assets/images/150.png",
-    "assets/images/150.png",
-    "assets/images/150.png",
-    "assets/images/150.png"]
+var pictures = ["assets/images/big-crystal.png",
+    "assets/images/Crystal_alliance.png",
+    "assets/images/crystal.png",
+    "assets/images/Premium_Hero_Crystal.png"]
 
 
 
@@ -44,21 +45,22 @@ var startGame = function () {
     }
 
 }
-var updateImage = function () {
-    for (var i = 0; i < pictures.length; i++) {
+var resetImage = function () {
+    $(".image").each(function () {
         randomNumber = Math.floor(Math.random() * 12) + 1;
-        $(".image" + i).attr({
+        $(this).attr({
             "data-number": randomNumber
-        })
-        console.log(randomNumber)
-    };
+        });
+        console.log(randomNumber);
+    })
 }
+
 
 var reset = function () {
     counter = 0;
     winningNum = Math.floor(Math.random() * 60) + 30;
     $("#win-points").text(winningNum);
-    updateImage();
+    resetImage();
 }
 startGame();
 //on click function when clicking on an image
@@ -74,6 +76,7 @@ $(".image").on("click", function () {
 
     if (winningNum < counter) {
         losses++;
+        counter = 0;
         console.log("lost " + losses);
         reset();
         console.log("reset");;
